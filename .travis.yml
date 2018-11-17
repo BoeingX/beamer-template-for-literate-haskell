@@ -1,6 +1,5 @@
 language: generic
 
-# Dependency of the minted package
 before_install:
     - sudo apt-get install python-pygments
 
@@ -9,14 +8,25 @@ install:
 
 cache:
   directories:
-    - /tmp/texlive
-    - $HOME/.texlive
+      - "/tmp/texlive"
+      - "$HOME/.texlive"
 
-# Change working directory so including files will work
 before_script: cd $TRAVIS_BUILD_DIR/
+
 script:
     - mkdir build
     - cd build
     - travis_wait 3 xelatex -shell-escape ../app/Main.lhs
-    # Compile twice to fix possible references
     - travis_wait 3 xelatex -shell-escape ../app/Main.lhs
+    - cd ..
+
+deploy:
+  provider: releases
+  api_key:
+    secure: QZ39IaYnYHU7Pv4eewnenuoksncx5DXnVk/dLSD5mgNiO/KzmO2r5Ovgq2nAOH5W0GaheuAs7QCyEvtJIFRjvNU+vWVPg0Xqh9wgqP6R8QUsIzoeBIuh/1fntZh7AElPVbhQnZpqt70nu5057haMORviG2DuunrkryhKiEfpAh8t5mYiqbdMTCL6E5TNlhPykTRWXT4QblggPpOHd+Owc11rDZmKvQ/HTlees6Wh+2d6dKHH1ecFt7rZzV6uP6000A3xlDJ0bAhV26HxBEu5av8oxVwlfX/Jn9oQMXJ+2exBgjwg2t+VOKfiFQ4LIUY/0G3a2LbXv2f7Tj2QY+vwTeK59RG2F0DMYDSbEvxrkLHlfjsK0iHTshbqAWt/8ERtxmeadzxCZ52R5sMExkayw2YbP5ntLFb5kV1ceZU8b4X8qw8Cjc+ht9ft7AkM8M6yhq9X9bWl5Z41JoxTL9z3Smoui3npG/NyC7xHOB6Lv7w3rJgGG3tNJqUc9YiUbKhGHkb/On5JM3fIGAYfifzwF4E2HmblbRQUwvbHcrVYducHvpWK7jpo4MJLB2s+lDrMhvzvaRI2SNc7YV1M84LEswtSE8l8ec9SzSBUuvcyCPUfISxUv5+KwLs62qP7bRoq8BsYPZ+RTipL30/BtWlIjpdJcvD7cquCB+cS2GmMLEc=
+  file:
+    - ./build/Main.pdf
+  skip_cleanup: true
+  on:
+    tags: true
+    branch: master
