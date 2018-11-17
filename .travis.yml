@@ -1,7 +1,12 @@
 language: generic
 
 before_install:
+    # LaTeX minted
     - sudo apt-get install python-pygments
+    # Haskell stack
+    - mkdir -p ~/.local/bin
+    - export PATH=$HOME/.local/bin:$PATH
+    - travis_retry curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
 
 install:
     - source .texlive/texlive_install.sh
@@ -10,10 +15,12 @@ cache:
   directories:
       - "/tmp/texlive"
       - "$HOME/.texlive"
-
-before_script: cd $TRAVIS_BUILD_DIR/
+      - "$HOME/.stack"
 
 script:
+    - echo "Build Haskell code"
+    - stack build
+    - echo "Build LaTeX code"
     - mkdir build
     - cd build
     - travis_wait 3 xelatex -shell-escape ../app/Main.lhs
