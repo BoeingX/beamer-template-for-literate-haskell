@@ -1,0 +1,32 @@
+name:                beamer-template-for-literate-haskell
+version:             0.1.0.0
+github:              "BoeingX/beamer-template-for-literate-haskell"
+license:             BSD3
+author:              "Baoyang SONG"
+maintainer:          "user@domain.com"
+copyright:           "BSD3"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/BoeingX/beamer-template-for-literate-haskell#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+executables:
+  beamer-template-for-literate-haskell-exe:
+    main:                Main.lhs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
