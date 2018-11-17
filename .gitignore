@@ -287,3 +287,5 @@ TSWLatexianTemp*
 
 # standalone packages
 *.sta
+
+build
