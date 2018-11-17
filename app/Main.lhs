@@ -21,7 +21,9 @@
 \end{frame}
 
 \begin{slide}{Example}
-This only appear in Haskell (see source code)
+
+\begin{itemize}
+\item This only appear in Haskell (see source code)
 \ignore{
 \begin{code}
 module Main where
@@ -33,18 +35,19 @@ main = print bar
 \end{code}
 }
 
-This only appear in slides
+\item This only appear in slides
 \begin{spec}
 -- broken code
 foo :: String
-foo = bar
+foo = brokenCode
 \end{spec}
 
-And this appear both in slides and Haskell
+\item This appear both in slides and Haskell
 \begin{code}
 bar :: String
 bar = "Hello World!"
 \end{code}
+\end{itemize}
 
 \end{slide}
 
